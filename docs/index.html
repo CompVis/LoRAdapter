@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description"
+    content="LoRAdapter unifies both style and structure conditioning under the same formulation using a novel conditional LoRA block that enables zero-shot control for T2I models.">
+  <meta property="og:title" content="LoRAdapter for Efficient 0-Shot Conditioning of T2I models" />
+  <meta property="og:description"
+    content="LoRAdapter unifies both style and structure conditioning under the same formulation using a novel conditional LoRA block that enables zero-shot control for T2I models." />
+  <meta property="og:url" content="https://compvis.github.io/conditional-lora" />
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="/conditional-lora/static/images/main.jpg" />
+  <meta property="og:image:width" content="2565" />
+  <meta property="og:image:height" content="1300" />
+
+
+  <meta name="twitter:title" content="LoRAdapter for Efficient 0-Shot Conditioning of T2I models">
+  <meta name="twitter:description"
+    content="LoRAdapter unifies both style and structure conditioning under the same formulation using a novel conditional LoRA block that enables zero-shot control for T2I models.">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="/conditional-lora/static/images/main.jpg">
+  <meta name="twitter:card"
+    content="LoRAdapter unifies both style and structure conditioning under the same formulation using a novel conditional LoRA block that enables zero-shot control for T2I models.">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="LoRA,Adapter,T2I,Diffusion,Control,Generation,Image,Conditioning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>Academic Project Page</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">LoRAdapter for Efficient 0-Shot Conditioning of T2I models</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="https://twitter.com/nickstracke_" target="_blank">Nick Stracke</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://github.com/stefan-baumann" target="_blank">Stefan Andreas
+                  Baumann</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="" target="_blank">Josh Susskind</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="" target="_blank">Miguel Angel Bautista</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://ommer-lab.com/" target="_blank">Björn Ommer</a><sup>1</sup>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">CompVis @ LMU Munich, MCML<sup>1</sup></span> <br>
+              <span class="author-block">Apple<sup>2</sup></span>
+              <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Arxiv PDF link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <!-- Supplementary PDF link -->
+                <span class="link-block">
+                  <a href="static/pdfs/supplementary_material.pdf" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Supplementary</span>
+                  </a>
+                </span>
+
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="https://github.com/YOUR REPO HERE" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Teaser video-->
+  <!-- <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <video poster="" id="tree" autoplay controls muted loop height="100%">
+          <source src="static/videos/banner_video.mp4" type="video/mp4">
+        </video>
+        <h2 class="subtitle has-text-centered">
+          Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat
+          pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus.
+        </h2>
+      </div>
+    </div>
+  </section> -->
+  <!-- End teaser video -->
+
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container">
+        <!-- <h2 class="title is-3">Video Presentation</h2> -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+
+            <img src="static/images/main.jpg" alt="" style="width: 100%; height: auto;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Paper abstract -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Overview</h2>
+          <div class="content has-text-justified">
+            <p>
+              Text-to-image generative models have become a prominent and powerful tool that excels at generating
+              high-resolution realistic images. However, guiding the generative process of these models to consider
+              detailed forms of conditioning reflecting style and/or structure information remains an open problem. In
+              this paper, we present LoRAdapter, an approach that unifies both style and structure
+              conditioning under the same formulation using a novel conditional LoRA block that enables zero-shot
+              control. LoRAdapter is an efficient, powerful, and architecture-agnostic approach to condition
+              text-to-image diffusion models, which enables fine-grained control conditioning during generation and
+              outperforms recent state-of-the-art approaches.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End paper abstract -->
+
+
+  <section class="section hero">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">How it works</h2>
+          <div class="content has-text-justified">
+            <img src="static/images/architecture.png" alt="" style="width: 100%; height: auto;">
+            <p>
+              Following the standard LoRA method, we keep the original weight matrix W_0 frozen and add two new
+              trainable
+              weight matrices A and B for each layer (i) that we want to adapt.
+              Usually, we would train A and B on a small dataset to capture a specific style or subject, resulting in an
+              adapter that is fixed at inference time.
+              However, we propose to dynamically apply a transformation φ on the embedding of the first LoRA matrix A.
+              In
+              practice, we
+              implement φ as an affine transformation with scale and shift parameter γ and β, respectively. These are
+              predicted by a mapping network that depend on the conditioning c.
+            </p>
+          </div>
+          <!-- <div class="content has-text-justified">
+            <p>
+              Text-to-image generative models have become a prominent and powerful tool that excels at generating
+              high-resolution realistic images. However, guiding the generative process of these models to consider
+              detailed forms of conditioning reflecting style and/or structure information remains an open problem. In
+              this paper, we present LoRAdapter, an approach that unifies both style and structure
+              conditioning under the same formulation using a novel conditional LoRA block that enables zero-shot
+              control. LoRAdapter is an efficient, powerful, and architecture-agnostic approach to condition
+              text-to-image diffusion models, which enables fine-grained control conditioning during generation and
+              outperforms recent state-of-the-art approaches.
+            </p>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Qualitative Comparison</h2>
+          <div class="content">
+            <h3 class="title">Style</h3>
+            <img src="static/images/qual_style.png" alt="">
+            <p class="has-text-justified" style="font-size: 16px;">
+              Samples from our method with style conditioning compared against other methods. We used an empty prompt
+              and only conditioned on the image. We generally perform on par with IP-Adapter and outperform it on some
+              samples. Note that the third image from the left is less degraded, and the third image from the right
+              captures the mane of the horse better.
+            </p>
+            <h3 class="title">Structure</h3>
+            <img src="static/images/qual_struct.png" alt="">
+
+            <p class="has-text-justified" style="font-size: 16px;">
+              Samples from our method with structural conditioning compared against other methods. Note that for our
+              method, especially compared with T2I Adapter, the details of the images are substantially more closely
+              aligned with the depth prompt (see e.g. the lamp in the background of the living room scene and the side
+              table's legs, or the salad on the pizza)
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section hero">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Quantitative Comparison</h2>
+          <div class="content">
+            <h3 class="title">Style</h3>
+            <img src="static/images/quan_style.png" alt="">
+            <p class="has-text-justified" style="font-size: 16px;">
+              Best results are in <b>bold</b>. LoRAdapter needs the fewest parameters and is able to achieve
+              state-of-the-art
+              performance while also enabling direct structure control.
+            </p>
+            <h3 class="title">Structure</h3>
+            <img src="static/images/quan_depth.png" alt="">
+
+            <p class="has-text-justified" style="font-size: 16px;">
+              Best results are in <b>bold</b>. We evaluate cycle consistency (MSE-d), FID and LPIPS. The difference
+              between configuration A and B is the number of layers that are adapted resulting in a different number of
+              parameters. LoRAdapter outperforms all other methods in all metrics.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Image carousel -->
+  <!-- <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container">
+        <div id="results-carousel" class="carousel results-carousel">
+          <div class="item">
+            <img src="static/images/carousel1.jpg" alt="MY ALT TEXT" />
+            <h2 class="subtitle has-text-centered">
+              First image description.
+            </h2>
+          </div>
+          <div class="item">
+            <img src="static/images/carousel2.jpg" alt="MY ALT TEXT" />
+            <h2 class="subtitle has-text-centered">
+              Second image description.
+            </h2>
+          </div>
+          <div class="item">
+            <img src="static/images/carousel3.jpg" alt="MY ALT TEXT" />
+            <h2 class="subtitle has-text-centered">
+              Third image description.
+            </h2>
+          </div>
+          <div class="item">
+            <img src="static/images/carousel4.jpg" alt="MY ALT TEXT" />
+            <h2 class="subtitle has-text-centered">
+              Fourth image description.
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <!-- End image carousel -->
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Paper poster -->
+  <!-- <section class="hero is-small is-light">
+    <div class="hero-body">
+      <div class="container">
+        <h2 class="title">Poster</h2>
+
+        <iframe src="static/pdfs/sample.pdf" width="100%" height="550">
+        </iframe>
+
+      </div>
+    </div>
+  </section> -->
+  <!--End paper poster -->
+
+
+  <!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>
+@misc{stracke2024loradapter,
+  title={CTRLorALTer: Conditional LoRAdapter for Efficient 0-Shot Control & Altering of T2I Models}, 
+  author={Nick Stracke and Stefan A. Baumann and Josh Susskind and Miguel Angel Bautista and Björn Ommer},
+  year={2024},
+  eprint={TODO},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV}
+}
+      </code></pre>
+    </div>
+  </section>
+  <!--End BibTex citation -->
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content" style="text-align: center;">
+
+            <p>
+              Built using <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                target="_blank">Academic Project Page Template</a>. Thanks!
+              <br> This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Statcounter tracking code -->
+
+  <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+  <!-- End of Statcounter Code -->
+
+</body>
+
+</html>
