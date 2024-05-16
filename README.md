@@ -29,7 +29,7 @@ If you use this codebase or otherwise found our work valuable, please cite our p
   title={CTRLorALTer: Conditional LoRAdapter for Efficient 0-Shot Control & Altering of T2I Models},
   author={Nick Stracke and Stefan Andreas Baumann and Joshua Susskind and Miguel Angel Bautista and Björn Ommer},
   year={2024},
-  eprint={TODO},
+  eprint={2405.07913},
   archivePrefix={arXiv},
   primaryClass={cs.CV}
 }
