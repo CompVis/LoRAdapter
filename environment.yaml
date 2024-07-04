@@ -1,0 +1,25 @@
+name: loradapter
+channels:
+  - pytorch
+  - nvidia
+  - defaults
+dependencies:
+  - python=3.11
+  - pip=23.3
+  - pytorch=2.1.2
+  - pytorch-cuda=12.1
+  - pip:
+    - diffusers==0.25.0
+    - accelerate
+    - torchvision
+    - transformers
+    - tensorboard
+    - Pillow
+    - hydra-core
+    - jaxtyping
+    - einops
+    - numpy
+    - open-clip-torch
+    - torch-fidelity
+    - basicsr
+    - tqdm

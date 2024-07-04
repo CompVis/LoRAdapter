@@ -1,0 +1,18 @@
+defaults:
+  - mapper_network: asm15
+  - encoder: ???
+  - _self_
+
+cfg: false
+
+config:
+  use_depth: true
+  c_dim: 128
+  rank: 128
+  adaption_mode: only_self
+  lora_cls: SimpleLoraLinear
+  shift: true
+  broadcast_tokens: false # important!!
+
+mapper_network:
+  c_dim: ${..config.c_dim}

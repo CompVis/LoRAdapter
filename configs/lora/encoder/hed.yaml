@@ -1,0 +1,5 @@
+defaults:
+  - _self_
+
+_target_: src.annotators.hed.TorchHEDdetector
+size: ${size}

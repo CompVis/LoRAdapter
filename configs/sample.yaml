@@ -1,0 +1,26 @@
+defaults:
+  - data: ???
+  - model: ???
+  - _self_
+  - experiment: null
+
+size: ???
+prompt: null
+
+val_images: 9 
+seed: 42
+n_samples: 3
+
+tag: ''
+
+hydra:
+  run:
+    dir: outputs/sample/${tag}/runs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: outputs/sample/${tag}/multiruns/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num} 
+  job:
+    chdir: true
+
+local_files_only: false
+use_embeds: false

@@ -1,0 +1,6 @@
+defaults:
+  - _self_
+
+_target_: src.annotators.openclip.VisionModel
+clip_model: 'laion/CLIP-ViT-H-14-laion2B-s32B-b79K'
+local_files_only: ${local_files_only}

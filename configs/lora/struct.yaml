@@ -1,0 +1,16 @@
+defaults:
+  - mapper_network: fsm15
+  - encoder: ???
+  - _self_
+
+cfg: false
+
+config:
+  c_dim: 128
+  rank: 128
+  adaption_mode: only_res_conv
+  lora_cls: NewStructLoRAConv
+  
+
+mapper_network:
+  c_dim: ${..config.c_dim}

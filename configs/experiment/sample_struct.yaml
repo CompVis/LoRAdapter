@@ -1,0 +1,37 @@
+# @package _global_
+
+defaults:
+  - /lora@lora.struct: struct
+  - override /lora/encoder@lora.struct.encoder: midas # hed
+  - override /model: sd15
+  - override /data: local
+  - _self_
+
+
+size: 512
+n_samples: 4
+
+save_grid: true
+log_cond: true
+
+data:
+  caption_from_name: true
+  caption_prefix: "a picture of "
+  directories: 
+    - data
+
+model:
+  guidance_scale: 7.5
+
+
+lora:
+  struct:
+    cfg: false 
+    # ckpt_path: checkpoints/sd15-hed-128-only-res
+    ckpt_path: checkpoints/sd15-depth-128-only-res
+    config:
+      c_dim: 128
+      rank: 128
+      adaption_mode: only_res_conv
+
+tag: struct

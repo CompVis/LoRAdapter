@@ -1,0 +1,18 @@
+defaults:
+  - mapper_network: simple
+  - encoder: ViT-H-14-proj
+  - _self_
+
+cfg: true
+
+config:
+  c_dim: 1024
+  rank: 160
+  adaption_mode: only_cross
+  lora_cls: SimpleLoraLinear
+  broadcast_tokens: true
+
+
+mapper_network:
+  c_dim: ${..config.c_dim}
+  d_model: ${..config.c_dim}

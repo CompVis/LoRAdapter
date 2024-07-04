@@ -1,0 +1,49 @@
+# @package _global_
+
+defaults:
+  - /lora@lora.style: style
+  - override /model: sdxl
+  - override /data: local
+  - _self_
+
+size: 1024
+
+
+
+data:
+  caption_from_name: true
+  caption_prefix: "a picture of "
+  directories: 
+    - data
+
+
+prompt: null
+
+n_samples: 4
+
+seed: 87651331119
+
+model:
+  guidance_scale: 10
+
+
+save_grid: false
+
+tag: b-lora
+
+bf16: true
+
+# set true if using b-lora_content or b-lora_style
+ignore_check: true
+
+
+lora:
+  style:
+    ckpt_path: checkpoints/sdxl_b-lora_256
+    config:
+      adaption_mode: b-lora # b-lora_content or b-lora_style
+      rank:  256
+      c_dim: 1024
+      lora_scale: 1
+
+local_files_only: false

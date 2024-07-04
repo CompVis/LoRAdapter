@@ -1,0 +1,6 @@
+defaults:
+  - _self_
+
+_target_: src.annotators.style.VisionModel
+clip_model: openai/clip-vit-large-patch14
+with_projection: true

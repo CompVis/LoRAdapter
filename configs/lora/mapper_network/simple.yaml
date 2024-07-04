@@ -1,0 +1,6 @@
+defaults:
+  - _self_
+
+_target_: src.mapper_network.SimpleMapper
+d_model: ???
+c_dim: ???

@@ -1,0 +1,23 @@
+defaults:
+  - _self_
+
+_target_: src.data.local.ImageDataModule
+directories: 
+  - /p/project/degeai/stracke1/condition_lora/ip_data
+transform:
+  - _target_: torchvision.transforms.Resize
+    size: 512
+  - _target_: torchvision.transforms.CenterCrop
+    size: 512
+  - _target_: torchvision.transforms.ToTensor
+  - _target_: torchvision.transforms.Normalize
+    mean:
+      - 0.5
+      - 0.5
+      - 0.5
+    std:
+      - 0.5
+      - 0.5
+      - 0.5
+batch_size: 1
+

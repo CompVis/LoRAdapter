@@ -1,0 +1,34 @@
+# @package _global_
+
+defaults:
+  - /lora@lora.style: style
+  - override /model: sd15
+  - override /data: local
+  - _self_
+
+size: 512
+
+data:
+  caption_from_name: true
+  caption_prefix: "a picture of "
+  directories: 
+    - data
+
+# replace for fixed prompt
+prompt: null
+
+n_samples: 4
+
+seed: 7534
+
+model:
+  guidance_scale: 7.5
+
+lora:
+  style:
+    ckpt_path: checkpoints/sd15-style-cross-160-h
+    config:
+      lora_scale: 1
+
+
+tag: style

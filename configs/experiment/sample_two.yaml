@@ -1,0 +1,55 @@
+# @package _global_
+
+# USE WITH sample_two
+
+defaults:
+  - /lora@lora.style: style
+  - /lora@lora.struct: struct
+  - /data@data2: local
+  - override /model: sd15
+  - override /data: local
+  - override /lora/encoder@lora.struct.encoder: midas
+  - _self_
+
+size: 512
+prompt: ''
+
+save_grid: true
+log_cond: true
+
+data:
+  caption_from_name: true
+  caption_prefix: "a picture of "
+  directories: 
+    - data
+
+data2:
+  caption_from_name: true
+  caption_prefix: "a picture of "
+  directories: 
+    - data
+
+model:
+  guidance_scale: 7.5
+
+
+n_samples: 4
+
+seed: 7534
+
+lora:
+  style:
+    ckpt_path: checkpoints/sd15-style-cross-160-h
+    config:
+      lora_scale: 1
+  struct:
+    cfg: false 
+    # ckpt_path: checkpoints/sd15-hed-128-only-res
+    ckpt_path: checkpoints/sd15-depth-128-only-res
+    config:
+      c_dim: 128
+      rank: 128
+      adaption_mode: only_res_conv
+
+
+

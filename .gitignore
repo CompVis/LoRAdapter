@@ -1,1 +1,5 @@
 .DS_Store
+outputs/
+checkpoints/
+*.pyc
+ignore

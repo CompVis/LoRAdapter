@@ -1,0 +1,8 @@
+defaults:
+  - _self_
+
+_target_: src.model.SDXL
+pipeline_type: diffusers.StableDiffusionXLPipeline
+model_name: stabilityai/stable-diffusion-xl-base-1.0
+use_embeds: ${use_embeds}
+local_files_only: ${local_files_only}
