@@ -23,4 +23,3 @@ hydra:
     chdir: true
 
 local_files_only: false
-use_embeds: false

@@ -1,0 +1,38 @@
+# @package _global_
+
+defaults:
+  - /lora@lora.struct: struct
+  - override /lora/encoder@lora.struct.encoder: midas
+  - override /model: sd15
+  - override /data: local
+  - _self_
+
+data:
+  batch_size: 8
+  caption_from_name: true
+  caption_prefix: "a picture of "
+  directories: 
+    - data
+
+lora:
+  struct:
+    optimize: true
+
+
+size: 512
+
+log_c: true
+
+val_batches: 4
+
+learning_rate: 1e-4
+
+ckpt_steps: 3000
+val_steps: 3000
+
+epochs: 10
+
+prompt: null
+
+# model:
+#   guidance_scale: 1.5

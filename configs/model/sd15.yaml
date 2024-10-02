@@ -4,6 +4,4 @@ defaults:
 _target_: src.model.SD15
 pipeline_type: diffusers.StableDiffusionPipeline
 model_name: runwayml/stable-diffusion-v1-5
-use_embeds: ${use_embeds}
-dtype: fp32
 local_files_only: ${local_files_only}

@@ -66,22 +66,53 @@ class ZipDataset(Dataset):
 
 
 class ImageDataModule:
-    def __init__(self, directories: list[str], transform: list, batch_size: int = 32, caption_from_name: bool = False, caption_prefix: str = ""):
+    def __init__(
+        self,
+        directories: list[str],
+        transform: list,
+        val_directories: list[str] = [],
+        batch_size: int = 32,
+        val_batch_size: int = 1,
+        workers: int = 4,
+        val_workers: int = 1,
+        caption_from_name: bool = False,
+        caption_prefix: str = "",
+    ):
         super().__init__()
-        project_root = Path(os.path.abspath(__file__)).parent.parent.parent
-        self.val_dataset = ZipDataset(
-            [ImageFolderDataset(directory=Path(project_root, d), transform=transforms.Compose(transform), caption_from_name=caption_from_name, caption_prefix=caption_prefix) for d in directories]
-        )
+
         self.batch_size = batch_size
+        self.val_batch_size = val_batch_size
+        self.workers = workers
+        self.val_workers = val_workers
+
+        project_root = Path(os.path.abspath(__file__)).parent.parent.parent
+
+        self.train_dataset = ZipDataset(
+            [
+                ImageFolderDataset(
+                    directory=Path(project_root, d),
+                    transform=transforms.Compose(transform),
+                    caption_from_name=caption_from_name,
+                    caption_prefix=caption_prefix,
+                )
+                for d in directories
+            ]
+        )
+
+        self.val_dataset = ZipDataset(
+            [
+                ImageFolderDataset(
+                    directory=Path(project_root, d),
+                    transform=transforms.Compose(transform),
+                    caption_from_name=caption_from_name,
+                    caption_prefix=caption_prefix,
+                )
+                for d in val_directories
+            ]
+        )
 
     def train_dataloader(self):
-        raise Exception("Not implemented")
+        return DataLoader(self.train_dataset, batch_size=self.batch_size, shuffle=True, num_workers=self.workers)
 
     def val_dataloader(self):
-        return DataLoader(self.val_dataset, batch_size=self.batch_size, shuffle=False)
-
-    def test_dataloader(self):
-        return DataLoader(self.val_dataset, batch_size=self.batch_size, shuffle=False)
-
-    def predict_dataloader(self):
-        raise Exception("Not implemented")
+        return DataLoader(self.val_dataset, batch_size=self.val_batch_size, shuffle=False, num_workers=self.val_workers)

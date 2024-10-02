@@ -1,0 +1,37 @@
+# @package _global_
+
+defaults:
+  - /lora@lora.style: style
+  - override /model: sd15
+  - override /data: local
+  - _self_
+
+data:
+  batch_size: 8
+  caption_from_name: true
+  caption_prefix: "a picture of "
+  directories: 
+    - data
+
+val_batches: 1
+
+lora:
+  style:
+    # rank: 208
+    # rank: 16
+    adaption_mode: only_cross
+    optimize: true
+
+size: 512
+
+learning_rate: 1e-4
+
+ckpt_steps: 1000
+val_steps: 1000
+
+epochs: 100
+
+prompt: null
+
+# model:
+#   guidance_scale: 1.5

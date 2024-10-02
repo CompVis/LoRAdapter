@@ -56,13 +56,11 @@ class ModelBase(ABC, nn.Module):
         self,
         pipeline_type: str,
         model_name: str,
-        dtype: str = "fp32",
         local_files_only: bool = True,
         c_dropout: float = 0.05,
         guidance_scale: float = 7.5,
         use_controlnet: bool = False,
         annotator: None | nn.Module = None,
-        use_embeds: bool = False,
         tiny_vae: bool = False,
     ) -> None:
         super().__init__()
@@ -80,7 +78,6 @@ class ModelBase(ABC, nn.Module):
         self.guidance_scale = guidance_scale
         self.use_controlnet = use_controlnet
 
-        self.use_embeds = use_embeds
         addition_config = {}
 
         # Note that this requires the controlnet pipe which also has to be set in the config
@@ -89,21 +86,11 @@ class ModelBase(ABC, nn.Module):
             vae = AutoencoderTiny.from_pretrained("madebyollin/taesd", local_files_only=local_files_only)
             addition_config["vae"] = vae
 
-        if dtype == "fp16":
-            addition_config["torch_dtype"] = torch.float16
-            addition_config["variant"] = "fp16"
-
-            # is this needed?
-            # vae = AutoencoderKL.from_pretrained("madebyollin/sdxl-vae-fp16-fix", torch_dtype=torch.float16)
-            # note that this might conflict with the tiny vae
-
         if self.use_controlnet:
             assert annotator is not None, "Need annotator for controlnet"
 
             controlnet = ControlNetModel.from_pretrained(
                 "lllyasviel/sd-controlnet-depth",
-                # "lllyasviel/control_v11f1p_sd15_depth",
-                # "lllyasviel/sd-controlnet-hed",
                 use_safetensors=True,
                 local_files_only=local_files_only,
                 **addition_config,
@@ -137,33 +124,17 @@ class ModelBase(ABC, nn.Module):
         self.unet = self.pipe.unet
         self.unet.requires_grad_(False)
 
-        if not use_embeds:
-            self.vae = self.pipe.vae
-            self.text_encoder = self.pipe.text_encoder
-            self.tokenizer = self.pipe.tokenizer
+        self.vae = self.pipe.vae
+        self.text_encoder = self.pipe.text_encoder
+        self.tokenizer = self.pipe.tokenizer
 
-            self.vae = self.pipe.vae
-            self.text_encoder.requires_grad_(False)
+        self.vae = self.pipe.vae
+        self.text_encoder.requires_grad_(False)
 
-            # handle sdxl case
-            if hasattr(self.pipe, "text_encoder_2"):
-                self.text_encoder_2 = self.pipe.text_encoder_2
-                self.text_encoder_2.requires_grad_(False)
-        else:
-            # maybe only delete encoder
-            # such that decoder can be used for validation
-            self.vae = self.pipe.vae
-            self.vae = self.pipe.vae
-
-            del self.pipe.vae.encoder  # keep decoder for val samples
-            del self.pipe.text_encoder
-            del self.pipe.tokenizer
-
-            if hasattr(self.pipe, "text_encoder_2"):
-                print("deleting sdxl text encoder 2")
-                del self.pipe.text_encoder_2
-                # this is needed otherwise some weird ref is left
-                self.pipe.text_encoder_2 = None
+        # handle sdxl case
+        if hasattr(self.pipe, "text_encoder_2"):
+            self.text_encoder_2 = self.pipe.text_encoder_2
+            self.text_encoder_2.requires_grad_(False)
 
     def add_lora_to_unet(
         self,
@@ -234,7 +205,11 @@ class ModelBase(ABC, nn.Module):
             if adaption_mode == "b-lora_style" and ("up_blocks.0.attentions.1" in path and "attn" in path):
                 _continue = False
 
-            if adaption_mode == "b-lora" and ("up_blocks.0.attentions.0" in path or "up_blocks.0.attentions.1" in path) and "attn" in path:
+            if (
+                adaption_mode == "b-lora"
+                and ("up_blocks.0.attentions.0" in path or "up_blocks.0.attentions.1" in path)
+                and "attn" in path
+            ):
                 _continue = False
 
                 # supposed setting content to have no effect
@@ -242,13 +217,25 @@ class ModelBase(ABC, nn.Module):
                 # class_config["lora_scale"] = 0.0
 
             # "down_blocks.2.attentions.1" in path or
-            if adaption_mode == "sdxl_inner" and ("mid_block" in path or "up_blocks.0.attentions.0" in path or "up_blocks.0.attentions.1" in path) and "attn2" in path:
+            if (
+                adaption_mode == "sdxl_inner"
+                and ("mid_block" in path or "up_blocks.0.attentions.0" in path or "up_blocks.0.attentions.1" in path)
+                and "attn2" in path
+            ):
                 _continue = False
 
-            if adaption_mode == "sdxl_cross" and ("down_blocks.2" in path or "up_blocks.0" in path or "mid_block" in path) and "attn2" in path:
+            if (
+                adaption_mode == "sdxl_cross"
+                and ("down_blocks.2" in path or "up_blocks.0" in path or "mid_block" in path)
+                and "attn2" in path
+            ):
                 _continue = False
 
-            if adaption_mode == "sdxl_self" and ("down_blocks.2" in path or "up_blocks.0" in path or "mid_block" in path) and "attn1" in path:
+            if (
+                adaption_mode == "sdxl_self"
+                and ("down_blocks.2" in path or "up_blocks.0" in path or "mid_block" in path)
+                and "attn1" in path
+            ):
                 _continue = False
 
             if _continue:
@@ -485,7 +472,9 @@ class SD15(ModelBase):
             dp.set_batch(mapped_cond)
 
         # Predict the noise residual
-        model_pred = self.unet(noisy_latents, timesteps, encoder_hidden_states=prompt_embeds, **additional_inputs).sample
+        model_pred = self.unet(
+            noisy_latents, timesteps, encoder_hidden_states=prompt_embeds, **additional_inputs
+        ).sample
 
         # get x0 prediction
         alphas_cumprod = self.noise_scheduler.alphas_cumprod.to(device=model_pred.device, dtype=model_pred.dtype)
@@ -572,7 +561,9 @@ class SD15(ModelBase):
 
         device = self.unet.device
 
-        prompt_embeds, negative_prompt_embeds = self.pipe.encode_prompt(prompt, device, num_images_per_prompt, True)  # do cfg
+        prompt_embeds, negative_prompt_embeds = self.pipe.encode_prompt(
+            prompt, device, num_images_per_prompt, True
+        )  # do cfg
         dtype = prompt_embeds.dtype
 
         # for cfg
@@ -801,30 +792,16 @@ class SDXL(ModelBase):
 
         B = imgs.shape[0]
 
-        if self.use_embeds:
-            assert batch is not None, "batch must be provided when use_embeds is True"
+        with torch.no_grad():
+            # Convert images to latent space
+            imgs = imgs.to(self.unet.device)
+            latents = self.pipe.vae.encode(imgs).latent_dist.sample()
+            latents = latents * self.pipe.vae.config.scaling_factor
 
-            latents = batch["latents.npy"].to(self.unet.device)
+            # prompt dropout
+            prompts = ["" if random.random() < self.c_dropout else p for p in prompts]
 
-            add_time_ids = self.compute_time_ids(self.unet.device, torch.float32)
-            add_time_ids = add_time_ids.to(self.unet.device).repeat(B, 1)
-
-            c = {
-                "prompt_embeds": batch["prompt_embeds.npy"].to(self.unet.device),
-                "add_text_embeds": batch["pooled_prompt_embeds.npy"].to(self.unet.device),
-                "add_time_ids": add_time_ids,
-            }
-        else:
-            with torch.no_grad():
-                # Convert images to latent space
-                imgs = imgs.to(self.unet.device)
-                latents = self.pipe.vae.encode(imgs).latent_dist.sample()
-                latents = latents * self.pipe.vae.config.scaling_factor
-
-                # prompt dropout
-                prompts = ["" if random.random() < self.c_dropout else p for p in prompts]
-
-                c = self.get_conditioning(prompts, B, latents.device, latents.dtype)
+            c = self.get_conditioning(prompts, B, latents.device, latents.dtype)
 
         unet_added_conditions = {
             "time_ids": c["add_time_ids"],
@@ -922,13 +899,6 @@ class SDXL(ModelBase):
 
         prompt_embeds = None
         pooled_prompt_embeds = None
-        if self.use_embeds:
-            assert batch is not None, "batch must be provided when use_embeds is True"
-
-            prompt_embeds = batch["prompt_embeds.npy"].to(self.unet.device)
-            pooled_prompt_embeds = batch["pooled_prompt_embeds.npy"].to(self.unet.device)
-
-            prompt = None
 
         # we have to do two separate forward passes for the cfg with the loras
         # add our lora conditioning
