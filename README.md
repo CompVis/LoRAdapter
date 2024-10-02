@@ -28,7 +28,7 @@ LoRAdapter is an efficient, powerful, and architecture-agnostic approach to cond
 - Released Code and Weights for inference
 
 ## 💪 TODO
-- [ ] Add training Code
+- [x] Add training Code
 - [ ] Add more structure conditioning checkpoints (including SDXL)
 - [ ] Experiment with SD3
 
