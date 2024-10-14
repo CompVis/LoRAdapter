@@ -9,7 +9,9 @@
     <sup>1</sup> <b>CompVis Group @ LMU Munich</b> <br/>
     <sup>2</sup> <b>Apple</b>
  </p>
- </p>
+</p>
+<p align="center">
+ <b>ECCV 2024</b>
 </p>
 
 
